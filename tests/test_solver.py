@@ -107,3 +107,9 @@ def test_crossover_works(eq_solver):
     sibling = eq_solver.crossover(10, 20)
 
     assert sibling == 14.142135623730951
+
+
+def test_selection_works(eq_solver):
+    """
+    Tests if the solver correctly selects the solutions
+    """
