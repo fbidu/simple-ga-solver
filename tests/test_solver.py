@@ -14,12 +14,14 @@ def eq_solver():
     """
     goal = lambda x: x * x - 49
     mutation = lambda x: x + uniform(-1, 1)
+    crossover = lambda x, y: (x * y) ** 0.5
     gas = GASolver(
         initial_pop=[0, 2, 4, 6],
         goal=goal,
         target_value=0,
         mutation=mutation,
         prob_mutation=0.7,
+        crossover_=crossover,
         random_seed=0,
     )
 
@@ -34,12 +36,14 @@ def test_initialization():
 
     goal = lambda x: x ^ 2 + 10
     mutation = lambda x: x + uniform(-1, 1)
+    crossover = lambda x, y: (x * y) ** 0.5
     gas = GASolver(
         initial_pop=[0, 2, 4, 6],
         goal=goal,
         target_value=0,
         mutation=mutation,
         prob_mutation=0.7,
+        crossover_=crossover,
         random_seed=0,
     )
 
@@ -92,3 +96,14 @@ def test_solver_mutates_all_pop(eq_solver):
         -38.33149205679761,
         -47.39656484998319,
     ]
+
+
+def test_crossover_works(eq_solver):
+    """
+    Tests if the solver correctly crosses over two solutions
+    """
+    eq_solver.random_seed = 4242424242
+
+    sibling = eq_solver.crossover(10, 20)
+
+    assert sibling == 14.142135623730951

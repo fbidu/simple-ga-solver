@@ -3,7 +3,7 @@ Defines the main Genetic Algorithm Solver class
 """
 from random import random, seed
 
-
+# pylint: disable=too-many-instance-attributes
 class GASolver:
     """
     A simple Genetic Algorithm Solver. It accepts an initial population, and several
@@ -23,6 +23,8 @@ class GASolver:
             mutation occur in any individual. Every time that the `mutation`
             function is invoked, there's `prob_mutation` chance of it actually
             DOING anything.
+        crossover_: (function): A callable that takes 2 arguments that are current
+            solutions and crosses them over, returning a new one
         random_seed (int, optional): If provided, the seed of Python's PRNG will
             be set to this. In practice you _only_ want to set this value when
             you need reproducible runs. Useful for testing
@@ -32,13 +34,25 @@ class GASolver:
 
     # pylint: disable=too-many-arguments, bad-continuation
     def __init__(
-        self, initial_pop, goal, target_value, mutation, prob_mutation, random_seed=None
+        self,
+        initial_pop,
+        goal,
+        target_value,
+        mutation,
+        prob_mutation,
+        crossover_,
+        random_seed=None,
     ):
         self.population = initial_pop
+
         self.goal = goal
         self.target_value = target_value
+
         self.mutation = mutation
         self.prob_mutation = prob_mutation
+
+        self.crossover_ = crossover_
+
         self.random_seed = random_seed
 
     @property
@@ -79,3 +93,10 @@ class GASolver:
         for details
         """
         self.population = [self.mutate(x) for x in self.population]
+
+    def crossover(self, sol_a, sol_b):
+        """
+        Calls the crossover function with the parameters
+        `sol_a` and `sol_b` and returns the given sibling
+        """
+        return self.crossover_(sol_a, sol_b)
