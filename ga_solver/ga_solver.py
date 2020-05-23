@@ -48,7 +48,7 @@ class GASolver:
         population by applying the goal function to
         all of its members
         """
-        self.__current_state = tuple(self.goal(indiv) for indiv in self.population)
+        self.__current_state = [self.goal(indiv) for indiv in self.population]
 
         return self.__current_state
 
@@ -71,3 +71,11 @@ class GASolver:
             return self.mutation(individual)
 
         return individual
+
+    def mutate_pop(self):
+        """
+        Runs the entire population through `mutate`. Note that not _every_ time
+        that mutate is called it actually does anything. Check `mutate's` doc
+        for details
+        """
+        self.population = [self.mutate(x) for x in self.population]

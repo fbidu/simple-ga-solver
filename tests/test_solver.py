@@ -50,7 +50,7 @@ def test_current_state_eval(eq_solver):
     """
     Tests if the GA solver correctly computes the current state
     """
-    assert eq_solver.current_state == (-49, -45, -33, -13)
+    assert eq_solver.current_state == [-49, -45, -33, -13]
     assert not eq_solver.solution_found
 
 
@@ -75,3 +75,20 @@ def test_solver_honors_mutation_prob(eq_solver):
         x = eq_solver.mutate(x)
 
     assert x == 2.733731801703599
+
+
+def test_solver_mutates_all_pop(eq_solver):
+    """
+    Tests if the solver mutate all the population correctly
+    """
+    eq_solver.random_seed = 4242424242
+
+    for _ in range(10):
+        eq_solver.mutate_pop()
+
+    assert eq_solver.current_state == [
+        3.798653529573585,
+        -21.266419263612008,
+        -38.33149205679761,
+        -47.39656484998319,
+    ]
