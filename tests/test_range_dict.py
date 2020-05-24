@@ -1,7 +1,7 @@
 """
 Unit tests for the RangeDict
 """
-from pytest import fixture
+from pytest import fixture, mark, raises
 
 from ga_solver import RangeDict
 
@@ -44,3 +44,32 @@ def test_upper_bounds(r_dict):
     assert r_dict[10 - 0.001] == "a"
     assert r_dict[20 - 0.001] == "b"
     assert r_dict[50 - 0.001] == "c"
+
+
+def test_decimals_works():
+    """
+    We should be able to use decimals as ranges
+    """
+    r_dict = RangeDict()
+    r_dict[(0.42, 7.42)] = "a"
+    assert r_dict[0.42] == "a"
+    assert r_dict[0.52] == "a"
+    assert r_dict[0.72] == "a"
+    assert r_dict[1] == "a"
+    assert r_dict[1.000001] == "a"
+    assert r_dict[2] == "a"
+    assert r_dict[3] == "a"
+    assert r_dict[7] == "a"
+    assert r_dict[7.42 - 0.0001] == "a"
+
+
+@mark.xfail
+def test_overlapping_ranges_are_forbidden():
+    """
+    Tests if overlaps raises error
+    """
+    r_dict = RangeDict()
+    r_dict[(0, 10)] = "a"
+
+    with raises(ValueError):
+        r_dict[(1, 3)] = "b"
