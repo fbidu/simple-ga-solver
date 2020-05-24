@@ -51,6 +51,8 @@ def roullete(population, random_seed=None):
     # This is safe because if the seed is None, Python will use a default behavior
     seed(random_seed)
 
+    # pylint: disable=fixme
+    # TODO: Cache this call somehow. LRU, maybe. Difficulty: dicts are non hashable
     population_range = build_roullete(population)
 
     return population_range[random()]

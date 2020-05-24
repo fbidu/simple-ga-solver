@@ -1,6 +1,7 @@
 """
 Defines the main Genetic Algorithm Solver class
 """
+from math import ceil
 from random import random, seed
 
 # pylint: disable=too-many-instance-attributes
@@ -12,19 +13,31 @@ class GASolver:
     Args:
 
         initial_pop (list): The elements of the initial population.
+
         goal (function): A function that accepts one member of the population
             and returns its current value.
         target_value (numeric): The value you're looking for. When the goal(x)
             for any member x of the population is equal to this, the solution
             has been found.
+
         mutation (function): A callable that accepts one member of the population
             and returns a mutated value of that member.
         prob_mutation (float, 0 <= prob_mutation <= 1)): The probability of a
             mutation occur in any individual. Every time that the `mutation`
             function is invoked, there's `prob_mutation` chance of it actually
             DOING anything.
+
         crossover_: (function): A callable that takes 2 arguments that are current
             solutions and crosses them over, returning a new one
+
+        selector: (function): A function that receives a dictionary containing
+            the current population and their fitness values and returns one
+            selected individual. Some of the classic selection functions
+            can be found in the `pop_selectors` submodule
+        selection_rate (float, 0 <= selection_rate <= 1): the rate of individuals
+            in the current population that will be selected to reproduce and
+            compose the next. Defaults to 0.5
+
         random_seed (int, optional): If provided, the seed of Python's PRNG will
             be set to this. In practice you _only_ want to set this value when
             you need reproducible runs. Useful for testing
@@ -41,6 +54,8 @@ class GASolver:
         mutation,
         prob_mutation,
         crossover_,
+        selector,
+        selection_rate=0.5,
         random_seed=None,
     ):
         self.population = initial_pop
@@ -53,6 +68,9 @@ class GASolver:
 
         self.crossover_ = crossover_
 
+        self.selector = selector
+        self.selection_rate = selection_rate
+
         self.random_seed = random_seed
 
     @property
@@ -62,7 +80,7 @@ class GASolver:
         population by applying the goal function to
         all of its members
         """
-        self.__current_state = [self.goal(indiv) for indiv in self.population]
+        self.__current_state = {indiv: self.goal(indiv) for indiv in self.population}
 
         return self.__current_state
 
@@ -72,7 +90,7 @@ class GASolver:
         Returns True if any member of the current population
         has goal(x) == target_value
         """
-        meets_target = [x == self.target_value for x in self.current_state]
+        meets_target = [x == self.target_value for x in self.current_state.values()]
         return any(meets_target)
 
     def mutate(self, individual):
@@ -100,3 +118,27 @@ class GASolver:
         `sol_a` and `sol_b` and returns the given sibling
         """
         return self.crossover_(sol_a, sol_b)
+
+    def select(self, replace=True):
+        """
+        Selects a new population using the given selector function. This
+        new population will have
+
+            size = ceil(current_population * selection_rate)
+
+        If `replace` is True, the current population
+        will be replaced by the new one.
+        """
+        seed(self.random_seed)
+
+        new_pop_size = ceil(len(self.population) * self.selection_rate)
+
+        new_pop = [
+            self.selector(self.current_state, random_seed=self.random_seed)
+            for _ in range(new_pop_size)
+        ]
+
+        if replace:
+            self.population = new_pop
+
+        return new_pop
