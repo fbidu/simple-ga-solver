@@ -73,3 +73,12 @@ def test_overlapping_ranges_are_forbidden():
 
     with raises(ValueError):
         r_dict[(1, 3)] = "b"
+
+
+@mark.xfail
+def test_equality_works(r_dict):
+    """
+    RangeDicts should be comparable with dicts
+    """
+
+    assert r_dict == {(0, 10): "a", (10, 20): "b", (20, 50): "c"}
