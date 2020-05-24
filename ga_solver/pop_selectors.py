@@ -11,6 +11,10 @@ def build_roullete(population):
     Returns a RangeDict with keys related to the value's probability of
     being chosen in a Roullete Selection
 
+    Args:
+        population (dict): A dictionary whose keys are the individuals in the
+            population and the keys are their fitness value
+
     >>> build_roullete({"a": 10, "b": 10, "c": 20})
     {(0, 0.25): "a", (0.25, 0.5): "b", (0.5, 1): "c"}
     """
@@ -27,7 +31,7 @@ def build_roullete(population):
     return result
 
 
-def roullete_selection(population, random_seed=None):
+def roullete(population, random_seed=None):
     """
     Uses a classic roullete strategy for selection. Every individual has a
     probability of being selected equal to
@@ -35,23 +39,16 @@ def roullete_selection(population, random_seed=None):
     (its goal value)/(the sum of all goal values)
 
     Args:
-        population (dict): a dictionary containing the elements as key and their
-            fitness as values.
+        population (RangeDict): a RangeDict as provided by `build_roullete` where
+            the keys match an individual's probability of being selected
         random_seed (int, optional): if supplied, Python PRNG's seed is set to
             it. Use **only** if you need a total reproducible behavior such
             as in testing.
 
     Returns:
-        A list containing the selected members
+        One selected member
     """
     # This is safe because if the seed is None, Python will use a default behavior
     seed(random_seed)
-    total_fitness = sum(population.values())
 
-    selected = []
-
-    for item, fitness in population.items():
-        if random() < fitness / total_fitness:
-            selected.append(item)
-
-    return selected
+    return population[random()]
