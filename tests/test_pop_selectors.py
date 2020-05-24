@@ -16,14 +16,6 @@ def population():
     return pop
 
 
-@fixture
-def pop_range(population):
-    """
-    Provides a RangeDict for a demo pop
-    """
-    return selectors.build_roullete(population)
-
-
 def test_build_roullete(population):
     """
     Tests if build_roullete works with a simple population
@@ -36,9 +28,9 @@ def test_build_roullete(population):
     )
 
 
-def test_roullete(pop_range):
+def test_roullete(population):
     """
     Tests if the roullete selection works as expected
     """
-    selected = set(selectors.roullete(pop_range, random_seed=42424) for _ in range(10))
+    selected = set(selectors.roullete(population, random_seed=42424) for _ in range(10))
     assert selected == {"d"}

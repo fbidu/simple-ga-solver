@@ -39,8 +39,8 @@ def roullete(population, random_seed=None):
     (its goal value)/(the sum of all goal values)
 
     Args:
-        population (RangeDict): a RangeDict as provided by `build_roullete` where
-            the keys match an individual's probability of being selected
+        population (dict): A dictionary whose keys are the individuals in the
+            population and the keys are their fitness value
         random_seed (int, optional): if supplied, Python PRNG's seed is set to
             it. Use **only** if you need a total reproducible behavior such
             as in testing.
@@ -51,4 +51,6 @@ def roullete(population, random_seed=None):
     # This is safe because if the seed is None, Python will use a default behavior
     seed(random_seed)
 
-    return population[random()]
+    population_range = build_roullete(population)
+
+    return population_range[random()]
