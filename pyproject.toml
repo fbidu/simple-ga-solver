@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "01-simple-ga-solver"
+name = "ga_solver"
 version = "0.1.0"
 description = "Simple GA Solver is awesome"
 authors = ["Felipe 'Bidu' Rodrigues <felipe@felipevr.com>"]
