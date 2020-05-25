@@ -2,7 +2,7 @@
 Defines the main Genetic Algorithm Solver class
 """
 from itertools import combinations
-from math import ceil
+from math import ceil, floor
 from random import choices, random, seed
 
 # pylint: disable=too-many-instance-attributes
@@ -172,9 +172,10 @@ class GASolver:
                population and *replace* it by the selected members
 
             2. Random couples are selected to reproduce using the `crossover`
-               function. We select as much couples as the given `selection_rate`.
-               That is, if `selection_rate` = 0.5 and len(pop) = 10, the previous
-               step will select 5 individuals and this step will select 5 couples.
+               function. We select as much couples as needed to replace the size
+               of the population. That is, if `selection_rate` is 0.3, the previous
+               step will have selected 30% of the original population and we need
+               as much as 70% of the original to restore the original size.
 
             3. All the selected couples are crossed over and create new siblings
 
@@ -186,9 +187,11 @@ class GASolver:
         if self.solution_found or self.max_steps and self.steps >= self.max_steps:
             raise StopIteration
 
+        sibling_len = floor(1 - self.selection_rate) * len(self.population)
+
         self.select()
         all_couples = list(combinations(self.population, 2))
-        couples = choices(all_couples, k=len(self.population))
+        couples = choices(all_couples, k=sibling_len)
         siblings = [self.crossover(c[0], c[1]) for c in couples]
         self.population.extend(siblings)
         self.mutate_pop()
@@ -196,3 +199,9 @@ class GASolver:
         self.steps += 1
 
         return self.current_state
+
+    def __len__(self):
+        """
+        A solvers len() is its population's len()
+        """
+        return len(self.population)

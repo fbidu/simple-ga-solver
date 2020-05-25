@@ -1,7 +1,7 @@
 """
 Provides basic unitary tests for the solver
 """
-from random import uniform
+from random import randint, uniform
 from sys import maxsize
 
 from pytest import fixture, raises
@@ -146,3 +146,27 @@ def test_solver_honors_max_step(eq_solver):
     eq_solver.steps = 0
     for _ in range(20):
         next(eq_solver)
+
+
+def test_next_keeps_population_size(eq_solver):
+    """
+    When selecting and crossing-over, the new generation
+    must have the same size as the previous one.
+    """
+    eq_solver.population = [randint(-10000, 10000) for _ in range(33)]
+    previous_pop_len = len(eq_solver.population)
+
+    eq_solver.selection_rate = 1
+    eq_solver.max_steps = 3
+
+    for _ in eq_solver:
+        pass
+
+    assert len(eq_solver.population) == previous_pop_len
+
+
+def test_solver_len_works(eq_solver):
+    """
+    The solver's len() must be its population's len()
+    """
+    assert len(eq_solver) == len(eq_solver.population)
