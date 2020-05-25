@@ -184,3 +184,13 @@ def test_solver_has_solutions(eq_solver):
     assert -7 in eq_solver.solutions
     assert 7.0 in eq_solver.solutions
     assert -7.0 in eq_solver.solutions
+
+
+def test_solver_has_best_fit(eq_solver):
+    """
+    The solver should have a `best_fit` property
+    that returns members of the population
+    with the current best fit value
+    """
+
+    assert 6 in eq_solver.best_fit[0]

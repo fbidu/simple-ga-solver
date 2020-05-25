@@ -89,9 +89,22 @@ class GASolver:
         population by applying the goal function to
         all of its members
         """
+        # pylint: disable=fixme
+        # TODO: Cache this somehow
         self.__current_state = {indiv: self.goal(indiv) for indiv in self.population}
 
         return self.__current_state
+
+    @property
+    def best_fit(self):
+        """
+        Returns the individuals with the best fitness value and that value.
+        """
+        best_value = max(self.current_state.values())
+        bests = tuple(
+            indiv for indiv in self.population if self.goal(indiv) == best_value
+        )
+        return (bests, best_value)
 
     @property
     def solution_found(self):
