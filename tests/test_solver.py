@@ -154,7 +154,7 @@ def test_next_keeps_population_size(eq_solver):
     must have the same size as the previous one.
     """
     eq_solver.population = [randint(-10000, 10000) for _ in range(33)]
-    previous_pop_len = len(eq_solver.population)
+    previous_pop_len = len(eq_solver)
 
     eq_solver.selection_rate = 1
     eq_solver.max_steps = 3
@@ -162,7 +162,7 @@ def test_next_keeps_population_size(eq_solver):
     for _ in eq_solver:
         pass
 
-    assert len(eq_solver.population) == previous_pop_len
+    assert len(eq_solver) == previous_pop_len
 
 
 def test_solver_len_works(eq_solver):

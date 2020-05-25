@@ -140,7 +140,7 @@ class GASolver:
         """
         seed(self.random_seed)
 
-        new_pop_size = ceil(len(self.population) * self.selection_rate)
+        new_pop_size = ceil(len(self) * self.selection_rate)
 
         new_pop = [
             self.selector(self.current_state, random_seed=self.random_seed)
@@ -187,7 +187,7 @@ class GASolver:
         if self.solution_found or self.max_steps and self.steps >= self.max_steps:
             raise StopIteration
 
-        sibling_len = floor(1 - self.selection_rate) * len(self.population)
+        sibling_len = floor(1 - self.selection_rate) * len(self)
 
         self.select()
         all_couples = list(combinations(self.population, 2))
