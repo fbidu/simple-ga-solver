@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ga_solver"
 version = "0.1.0"
-description = "Simple GA Solver is awesome"
+description = "A simple, pure-python Genetic Algorithm solver"
 authors = ["Felipe 'Bidu' Rodrigues <felipe@felipevr.com>"]
 license = "MIT"
 
