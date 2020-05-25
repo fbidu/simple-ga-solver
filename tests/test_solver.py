@@ -4,7 +4,7 @@ Provides basic unitary tests for the solver
 from random import uniform
 from sys import maxsize
 
-from pytest import fixture
+from pytest import fixture, raises
 from ga_solver import GASolver
 from ga_solver.pop_selectors import roullete
 
@@ -113,3 +113,36 @@ def test_selection_works(eq_solver):
     Tests if the solver correctly selects the solutions
     """
     assert eq_solver.select(replace=False) == [6, 6]
+
+
+def test_solver_is_iterable(eq_solver):
+    """
+    Tests if the solver provides a valid iterable behavior
+    """
+
+    steps = 0
+
+    for _ in eq_solver:
+        steps += 1
+        if steps == 100:
+            break
+
+    assert eq_solver.current_state == {6: 0.07692307692307693}
+
+
+def test_solver_honors_max_step(eq_solver):
+    """
+    The solver should stop if a set number of steps is taken
+    """
+
+    eq_solver.max_steps = 20
+
+    # Assert it DOES stop if we try to go over it
+    with raises(StopIteration):
+        for _ in range(21):
+            next(eq_solver)
+
+    # Assert it DOES NOT stop if we go at the exact limit
+    eq_solver.steps = 0
+    for _ in range(20):
+        next(eq_solver)

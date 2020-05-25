@@ -1,8 +1,9 @@
 """
 Defines the main Genetic Algorithm Solver class
 """
+from itertools import combinations
 from math import ceil
-from random import random, seed
+from random import choices, random, seed
 
 # pylint: disable=too-many-instance-attributes
 class GASolver:
@@ -38,6 +39,10 @@ class GASolver:
             in the current population that will be selected to reproduce and
             compose the next. Defaults to 0.5
 
+        max_steps (int, optional): If supplied, the solver will iterate for at
+            most `max_steps`. The default is 0, which is the value that disable
+            the limit in steps.
+
         random_seed (int, optional): If provided, the seed of Python's PRNG will
             be set to this. In practice you _only_ want to set this value when
             you need reproducible runs. Useful for testing
@@ -56,6 +61,7 @@ class GASolver:
         crossover_,
         selector,
         selection_rate=0.5,
+        max_steps=0,
         random_seed=None,
     ):
         self.population = initial_pop
@@ -70,6 +76,9 @@ class GASolver:
 
         self.selector = selector
         self.selection_rate = selection_rate
+
+        self.max_steps = max_steps
+        self.steps = 0
 
         self.random_seed = random_seed
 
@@ -142,3 +151,48 @@ class GASolver:
             self.population = new_pop
 
         return new_pop
+
+    def __iter__(self):
+        """
+        Implementing the iterable protocol.
+        GASolver is an iterable itself!
+        """
+        return self
+
+    def __next__(self):
+        """
+        GASolver is an iterable that will execute until a solution is found or,
+        optionally, until a max number of steps is reached. That max number
+        may be defined in the `max_steps` property.
+
+        A `step` is built as follows:
+
+            1. The current population is selected by the `selector` function.
+               This will select a fixed `selection_rate` of the current
+               population and *replace* it by the selected members
+
+            2. Random couples are selected to reproduce using the `crossover`
+               function. We select as much couples as the given `selection_rate`.
+               That is, if `selection_rate` = 0.5 and len(pop) = 10, the previous
+               step will select 5 individuals and this step will select 5 couples.
+
+            3. All the selected couples are crossed over and create new siblings
+
+            4. The selected members of the current population and the siblings
+               make the new population
+
+            5. All the population suffers mutation by the `mutate` function
+        """
+        if self.solution_found or self.max_steps and self.steps >= self.max_steps:
+            raise StopIteration
+
+        self.select()
+        all_couples = list(combinations(self.population, 2))
+        couples = choices(all_couples, k=len(self.population))
+        siblings = [self.crossover(c[0], c[1]) for c in couples]
+        self.population.extend(siblings)
+        self.mutate_pop()
+
+        self.steps += 1
+
+        return self.current_state
