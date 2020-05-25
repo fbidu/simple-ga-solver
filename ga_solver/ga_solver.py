@@ -102,6 +102,18 @@ class GASolver:
         meets_target = [x == self.target_value for x in self.current_state.values()]
         return any(meets_target)
 
+    @property
+    def solutions(self):
+        """
+        Returns the member of the current population where
+        goal(individual) == target_value
+        """
+        solutions = [
+            indiv for indiv in self.population if self.goal(indiv) == self.target_value
+        ]
+
+        return solutions
+
     def mutate(self, individual):
         """
         Mutate tries to apply the mutation function, but it actually

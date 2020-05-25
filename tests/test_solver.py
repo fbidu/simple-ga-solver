@@ -170,3 +170,17 @@ def test_solver_len_works(eq_solver):
     The solver's len() must be its population's len()
     """
     assert len(eq_solver) == len(eq_solver.population)
+
+
+def test_solver_has_solutions(eq_solver):
+    """
+    The solver must provide a `solution` attribute
+    with the members of the current population
+    that solves the given problem
+    """
+    eq_solver.population.extend([7, -7, 7.0, -7.0])
+
+    assert 7 in eq_solver.solutions
+    assert -7 in eq_solver.solutions
+    assert 7.0 in eq_solver.solutions
+    assert -7.0 in eq_solver.solutions
