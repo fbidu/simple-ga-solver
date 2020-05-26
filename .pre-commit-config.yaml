@@ -25,6 +25,7 @@ repos:
             entry: poetry run pylint
             language: system
             files: \.py$
+            exclude: ^docs/
             stages: [commit]
 
           - id: system

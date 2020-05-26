@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to GASolver’s documentation! &#8212; GASolver 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GASolver" href="ga_solver.html" />
+
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+
+
+          <div class="body" role="main">
+
+  <div class="section" id="welcome-to-gasolver-s-documentation">
+<h1>Welcome to GASolver’s documentation!<a class="headerlink" href="#welcome-to-gasolver-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>GASolver is a simple and pure-Python framework for solving problems with <a class="reference external" href="https://natureofcode.com/book/chapter-9-the-evolution-of-code/">genetic
+algorithms</a>.
+With its <em>pythonic</em> interface, it allows for a clean implementation of the
+necessary steps.</p>
+<p>It also provides selectors for your population. Currently, the only one available
+is the <a class="reference external" href="https://en.wikipedia.org/wiki/Fitness_proportionate_selection">Roulette Wheel Selection</a></p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Suppose you have defined the necessary attributes for a Genetic Algorithm, that
+is:</p>
+<ul class="simple">
+<li><p>A <strong>mutation</strong> function e.g.: <code class="docutils literal notranslate"><span class="pre">mutation(x)</span></code></p></li>
+<li><p>A <strong>crossover</strong> function e.g.: <code class="docutils literal notranslate"><span class="pre">crossover(x,</span> <span class="pre">y)</span></code></p></li>
+<li><p>An <strong>initial population</strong> e.g.: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code></p></li>
+<li><p>A <strong>fitness function</strong> e.g.: <code class="docutils literal notranslate"><span class="pre">fitness(x)</span></code></p></li>
+<li><p>A <strong>goal value</strong> e.g.: <code class="docutils literal notranslate"><span class="pre">42</span></code></p></li>
+</ul>
+<p>You can easily create a new instance of <code class="docutils literal notranslate"><span class="pre">GAsolver</span></code>:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ga_solver</span> <span class="kn">import</span> <span class="n">GASolver</span>
+
+<span class="n">solver</span> <span class="o">=</span> <span class="n">GASolver</span><span class="p">(</span>
+     <span class="n">initial_pop</span><span class="o">=</span><span class="n">initial_pop</span><span class="p">,</span>
+     <span class="n">goal</span><span class="o">=</span><span class="n">fitness</span><span class="p">,</span>
+     <span class="n">target_value</span><span class="o">=</span><span class="n">maxsize</span><span class="p">,</span>
+     <span class="n">mutation</span><span class="o">=</span><span class="n">mutation</span><span class="p">,</span>
+     <span class="n">prob_mutation</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+     <span class="n">crossover_</span><span class="o">=</span><span class="n">crossover</span><span class="p">,</span>
+     <span class="n">selector</span><span class="o">=</span><span class="n">roullete</span>
+ <span class="p">)</span>
+
+<span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">solver</span><span class="p">:</span>  <span class="c1"># GASolvers are iterable</span>
+   <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The current step is </span><span class="si">{</span><span class="n">solver</span><span class="o">.</span><span class="n">steps</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+   <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The best fit so far has value of </span><span class="si">{</span><span class="n">solver</span><span class="o">.</span><span class="n">best_solution</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+   <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The current state is </span><span class="si">{</span><span class="n">state</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+   <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Population has size </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">problem</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ga_solver.html">GASolver</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">GASolver</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ga_solver.html">GASolver</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="ga_solver.html" title="next chapter">GASolver</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Felipe Bidu.
+
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+
+
+
+  </body>
+</html>

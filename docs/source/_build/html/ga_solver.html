@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>GASolver &#8212; GASolver 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+
+
+          <div class="body" role="main">
+
+  <div class="section" id="gasolver">
+<h1>GASolver<a class="headerlink" href="#gasolver" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="ga_solver.GASolver">
+<em class="property">class </em><code class="sig-prename descclassname">ga_solver.</code><code class="sig-name descname">GASolver</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">initial_pop</span></em>, <em class="sig-param"><span class="n">goal</span></em>, <em class="sig-param"><span class="n">target_value</span></em>, <em class="sig-param"><span class="n">mutation</span></em>, <em class="sig-param"><span class="n">prob_mutation</span></em>, <em class="sig-param"><span class="n">crossover_</span></em>, <em class="sig-param"><span class="n">selector</span></em>, <em class="sig-param"><span class="n">selection_rate</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">max_steps</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">random_seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ga_solver.GASolver" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple Genetic Algorithm Solver. It accepts an initial population, and several
+callables to define goal, mutation and crossovers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initial_pop</strong> (<em>list</em>) – The elements of the initial population.</p></li>
+<li><p><strong>goal</strong> (<em>function</em>) – A function that accepts one member of the population
+and returns its current value.</p></li>
+<li><p><strong>target_value</strong> (<em>numeric</em>) – The value you’re looking for. When the goal(x)
+for any member x of the population is equal to this, the solution
+has been found.</p></li>
+<li><p><strong>mutation</strong> (<em>function</em>) – A callable that accepts one member of the population
+and returns a mutated value of that member.</p></li>
+<li><p><strong>prob_mutation</strong> (<em>float</em><em>, </em><em>0 &lt;= prob_mutation &lt;= 1</em><em>)</em>) – The probability of a
+mutation occur in any individual. Every time that the <cite>mutation</cite>
+function is invoked, there’s <cite>prob_mutation</cite> chance of it actually
+DOING anything.</p></li>
+<li><p><strong>crossover_</strong> – (function): A callable that takes 2 arguments that are current
+solutions and crosses them over, returning a new one</p></li>
+<li><p><strong>selector</strong> – (function): A function that receives a dictionary containing
+the current population and their fitness values and returns one
+selected individual. Some of the classic selection functions
+can be found in the <cite>pop_selectors</cite> submodule</p></li>
+<li><p><strong>selection_rate</strong> (<em>float</em><em>, </em><em>0 &lt;= selection_rate &lt;= 1</em>) – the rate of individuals
+in the current population that will be selected to reproduce and
+compose the next. Defaults to 0.5</p></li>
+<li><p><strong>max_steps</strong> (<em>int</em><em>, </em><em>optional</em>) – If supplied, the solver will iterate for at
+most <cite>max_steps</cite>. The default is 0, which is the value that disable
+the limit in steps.</p></li>
+<li><p><strong>random_seed</strong> (<em>int</em><em>, </em><em>optional</em>) – If provided, the seed of Python’s PRNG will
+be set to this. In practice you _only_ want to set this value when
+you need reproducible runs. Useful for testing</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">GASolver</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Felipe Bidu.
+
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+
+      |
+      <a href="_sources/ga_solver.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+
+
+
+  </body>
+</html>
