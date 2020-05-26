@@ -24,8 +24,8 @@ class GASolver:
         mutation (function): A callable that accepts one member of the population
             and returns a mutated value of that member.
         prob_mutation (float, 0 <= prob_mutation <= 1)): The probability of a
-            mutation occur in any individual. Every time that the `mutation`
-            function is invoked, there's `prob_mutation` chance of it actually
+            mutation occur in any individual. Every time that the ``mutation``
+            function is invoked, there's ``prob_mutation`` chance of it actually
             DOING anything.
 
         crossover_: (function): A callable that takes 2 arguments that are current
@@ -34,13 +34,15 @@ class GASolver:
         selector: (function): A function that receives a dictionary containing
             the current population and their fitness values and returns one
             selected individual. Some of the classic selection functions
-            can be found in the `pop_selectors` submodule
+            can be found in the ``pop_selectors`` submodule
         selection_rate (float, 0 <= selection_rate <= 1): the rate of individuals
             in the current population that will be selected to reproduce and
             compose the next. Defaults to 0.5
+        min_select (integer, optional): if set, ``selector`` will select at least
+            ``min_select`` members of the current population to form the next
 
         max_steps (int, optional): If supplied, the solver will iterate for at
-            most `max_steps`. The default is 0, which is the value that disable
+            most ``max_steps``. The default is 0, which is the value that disable
             the limit in steps.
 
         random_seed (int, optional): If provided, the seed of Python's PRNG will
@@ -61,6 +63,7 @@ class GASolver:
         crossover_,
         selector,
         selection_rate=0.5,
+        min_select=0,
         max_steps=0,
         random_seed=None,
     ):
@@ -76,6 +79,7 @@ class GASolver:
 
         self.selector = selector
         self.selection_rate = selection_rate
+        self.min_select = min_select
 
         self.max_steps = max_steps
         self.steps = 0
@@ -166,6 +170,9 @@ class GASolver:
         seed(self.random_seed)
 
         new_pop_size = ceil(len(self) * self.selection_rate)
+
+        if self.min_select:
+            new_pop_size = max(new_pop_size, self.min_select)
 
         new_pop = [
             self.selector(self.current_state, random_seed=self.random_seed)

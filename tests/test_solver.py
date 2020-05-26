@@ -205,3 +205,21 @@ def test_solver_has_best_fit(eq_solver):
     """
 
     assert 6 in eq_solver.best_fit[0]
+
+
+def test_solver_honors_min_select(eq_solver):
+    """
+    The solver should accept a `min_select` argument and,
+    if set, the `select` stage should select at least
+    `min_select` members for the next generation.
+    """
+    eq_solver.min_select = 2
+    eq_solver.selection_rate = 0  # Forces the solver to select no one
+    eq_solver.select()
+    assert len(eq_solver) == 2
+
+    eq_solver.population = (1, 2, 3, 4, 5)
+    eq_solver.min_select = 2
+    eq_solver.selection_rate = 1  # Forces the solver to select everyone
+    eq_solver.select()
+    assert len(eq_solver) == 5
