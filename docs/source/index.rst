@@ -49,10 +49,11 @@ You can easily create a new instance of ``GAsolver``:
 
 
 .. toctree::
-   :maxdepth: 1
-   :caption: Contents:
+   :maxdepth: 2
+   :caption: API:
 
    ga_solver
+   pop_selectors
 
 
 
