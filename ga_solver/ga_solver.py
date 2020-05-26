@@ -212,7 +212,7 @@ class GASolver:
         if self.solution_found or self.max_steps and self.steps >= self.max_steps:
             raise StopIteration
 
-        sibling_len = floor(1 - self.selection_rate) * len(self)
+        sibling_len = floor((1 - self.selection_rate) * len(self))
 
         self.select()
         all_couples = list(combinations(self.population, 2))
