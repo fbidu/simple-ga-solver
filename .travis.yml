@@ -1,0 +1,12 @@
+# Config file for automatic testing at travis-ci.com
+
+language: python
+python:
+  - 3.8
+  - 3.7
+  - 3.6
+  - 3.5
+  - "nightly"
+
+# Command to run tests, e.g. python setup.py test
+script: pytest
