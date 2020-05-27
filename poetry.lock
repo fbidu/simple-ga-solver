@@ -33,7 +33,7 @@ python = "<3.8"
 version = ">=1.4.0,<1.5"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Atomic file writes."
 marker = "sys_platform == \"win32\""
 name = "atomicwrites"
@@ -42,7 +42,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.4.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Classes Without Boilerplate"
 name = "attrs"
 optional = false
@@ -76,8 +76,8 @@ category = "dev"
 description = "Validate configuration and produce human readable error messages."
 name = "cfgv"
 optional = false
-python-versions = ">=3.6.1"
-version = "3.1.0"
+python-versions = ">=3.6"
+version = "3.0.0"
 
 [[package]]
 category = "dev"
@@ -88,7 +88,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "7.1.2"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Cross-platform colored terminal text."
 marker = "sys_platform == \"win32\""
 name = "colorama"
@@ -97,7 +97,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "0.4.3"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Code coverage measurement for Python"
 name = "coverage"
 optional = false
@@ -134,10 +134,10 @@ description = "File identification library for Python"
 name = "identify"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
-version = "1.4.16"
+version = "1.4.17"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Read metadata from Python packages"
 marker = "python_version < \"3.8\""
 name = "importlib-metadata"
@@ -147,6 +147,24 @@ version = "1.6.0"
 
 [package.dependencies]
 zipp = ">=0.5"
+
+[[package]]
+category = "dev"
+description = "Read resources from Python packages"
+marker = "python_version < \"3.7\""
+name = "importlib-resources"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
+version = "1.5.0"
+
+[package.dependencies]
+[package.dependencies.importlib-metadata]
+python = "<3.8"
+version = "*"
+
+[package.dependencies.zipp]
+python = "<3.8"
+version = ">=0.4"
 
 [[package]]
 category = "dev"
@@ -213,7 +231,7 @@ python-versions = "*"
 version = "0.6.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "More routines for operating on iterables, beyond itertools"
 name = "more-itertools"
 optional = false
@@ -229,7 +247,7 @@ python-versions = "*"
 version = "1.3.5"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Core utilities for Python packages"
 name = "packaging"
 optional = false
@@ -269,7 +287,7 @@ python-versions = "*"
 version = "0.7.5"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "plugin and hook calling mechanisms for python"
 name = "pluggy"
 optional = false
@@ -286,8 +304,8 @@ category = "dev"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 name = "pre-commit"
 optional = false
-python-versions = ">=3.6.1"
-version = "2.4.0"
+python-versions = ">=3.6"
+version = "2.1.1"
 
 [package.dependencies]
 cfgv = ">=2.0.0"
@@ -295,10 +313,14 @@ identify = ">=1.0.0"
 nodeenv = ">=0.11.1"
 pyyaml = ">=5.1"
 toml = "*"
-virtualenv = ">=20.0.8"
+virtualenv = ">=15.2"
 
 [package.dependencies.importlib-metadata]
 python = "<3.8"
+version = "*"
+
+[package.dependencies.importlib-resources]
+python = "<3.7"
 version = "*"
 
 [[package]]
@@ -306,8 +328,8 @@ category = "dev"
 description = "Library for building powerful interactive command lines in Python"
 name = "prompt-toolkit"
 optional = false
-python-versions = ">=3.6.1"
-version = "3.0.5"
+python-versions = ">=3.6"
+version = "3.0.3"
 
 [package.dependencies]
 wcwidth = "*"
@@ -322,7 +344,7 @@ python-versions = "*"
 version = "0.6.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "library with cross-python path, ini-parsing, io, code, log facilities"
 name = "py"
 optional = false
@@ -353,7 +375,7 @@ mccabe = ">=0.6,<0.7"
 toml = ">=0.7.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Python parsing module"
 name = "pyparsing"
 optional = false
@@ -361,7 +383,7 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "2.4.7"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
@@ -383,7 +405,7 @@ python = "<3.8"
 version = ">=0.12"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Pytest plugin for measuring coverage."
 name = "pytest-cov"
 optional = false
@@ -403,7 +425,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "5.3.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Python 2 and 3 compatibility utilities"
 name = "six"
 optional = false
@@ -458,8 +480,12 @@ six = ">=1.9.0,<2"
 python = "<3.8"
 version = ">=0.12,<2"
 
+[package.dependencies.importlib-resources]
+python = "<3.7"
+version = ">=1.0,<2"
+
 [[package]]
-category = "main"
+category = "dev"
 description = "Measures number of Terminal column cells of wide-character codes"
 name = "wcwidth"
 optional = false
@@ -475,7 +501,7 @@ python-versions = "*"
 version = "1.12.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 marker = "python_version < \"3.8\""
 name = "zipp"
@@ -484,8 +510,8 @@ python-versions = ">=3.6"
 version = "3.1.0"
 
 [metadata]
-content-hash = "20b6e195f892bed75ea67473a7cef03a4005c6055620550b61010ebdd8e6f771"
-python-versions = "^3.7"
+content-hash = "cf33c3f16d06bf3f71c20cfa37b195f9544d469c4e20aba4b2ec542bb6f5d157"
+python-versions = "^3.6"
 
 [metadata.hashes]
 appdirs = ["7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41", "a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"]
@@ -495,15 +521,16 @@ atomicwrites = ["6d1784dea7c0c8d4a5172b6c620f40b6e4cbfdf96d783691f2e1302a7b88e19
 attrs = ["08a96c641c3a74e44eb59afb61a24f2cb9f4d7188748e76ba4bb5edfa3cb7d1c", "f7b7ce16570fe9965acd6d30101a28f62fb4a7f9e926b3bbc9b61f8b04247e72"]
 backcall = ["38ecd85be2c1e78f77fd91700c76e14667dc21e2713b63876c0eb901196e01e4", "bbbf4b1e5cd2bdb08f915895b51081c041bac22394fdfcfdfbe9f14b77c08bf2"]
 black = ["817243426042db1d36617910df579a54f1afd659adb96fc5032fcf4b36209739", "e030a9a28f542debc08acceb273f228ac422798e5215ba2a791a6ddeaaca22a5"]
-cfgv = ["1ccf53320421aeeb915275a196e23b3b8ae87dea8ac6698b1638001d4a486d53", "c8e8f552ffcc6194f4e18dd4f68d9aef0c0d58ae7e7be8c82bee3c5e9edfa513"]
+cfgv = ["04b093b14ddf9fd4d17c53ebfd55582d27b76ed30050193c14e560770c5360eb", "f22b426ed59cd2ab2b54ff96608d846c33dfb8766a67f0b4a6ce130ce244414f"]
 click = ["d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a", "dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"]
 colorama = ["7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff", "e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"]
 coverage = ["00f1d23f4336efc3b311ed0d807feb45098fc86dee1ca13b3d6768cdab187c8a", "01333e1bd22c59713ba8a79f088b3955946e293114479bbfc2e37d522be03355", "0cb4be7e784dcdc050fc58ef05b71aa8e89b7e6636b99967fadbdba694cf2b65", "0e61d9803d5851849c24f78227939c701ced6704f337cad0a91e0972c51c1ee7", "1601e480b9b99697a570cea7ef749e88123c04b92d84cedaa01e117436b4a0a9", "2742c7515b9eb368718cd091bad1a1b44135cc72468c731302b3d641895b83d1", "2d27a3f742c98e5c6b461ee6ef7287400a1956c11421eb574d843d9ec1f772f0", "402e1744733df483b93abbf209283898e9f0d67470707e3c7516d84f48524f55", "5c542d1e62eece33c306d66fe0a5c4f7f7b3c08fecc46ead86d7916684b36d6c", "5f2294dbf7875b991c381e3d5af2bcc3494d836affa52b809c91697449d0eda6", "6402bd2fdedabbdb63a316308142597534ea8e1895f4e7d8bf7476c5e8751fef", "66460ab1599d3cf894bb6baee8c684788819b71a5dc1e8fa2ecc152e5d752019", "782caea581a6e9ff75eccda79287daefd1d2631cc09d642b6ee2d6da21fc0a4e", "79a3cfd6346ce6c13145731d39db47b7a7b859c0272f02cdb89a3bdcbae233a0", "7a5bdad4edec57b5fb8dae7d3ee58622d626fd3a0be0dfceda162a7035885ecf", "8fa0cbc7ecad630e5b0f4f35b0f6ad419246b02bc750de7ac66db92667996d24", "a027ef0492ede1e03a8054e3c37b8def89a1e3c471482e9f046906ba4f2aafd2", "a3f3654d5734a3ece152636aad89f58afc9213c6520062db3978239db122f03c", "a82b92b04a23d3c8a581fc049228bafde988abacba397d57ce95fe95e0338ab4", "acf3763ed01af8410fc36afea23707d4ea58ba7e86a8ee915dfb9ceff9ef69d0", "adeb4c5b608574a3d647011af36f7586811a2c1197c861aedb548dd2453b41cd", "b83835506dfc185a319031cf853fa4bb1b3974b1f913f5bb1a0f3d98bdcded04", "bb28a7245de68bf29f6fb199545d072d1036a1917dca17a1e75bbb919e14ee8e", "bf9cb9a9fd8891e7efd2d44deb24b86d647394b9705b744ff6f8261e6f29a730", "c317eaf5ff46a34305b202e73404f55f7389ef834b8dbf4da09b9b9b37f76dd2", "dbe8c6ae7534b5b024296464f387d57c13caa942f6d8e6e0346f27e509f0f768", "de807ae933cfb7f0c7d9d981a053772452217df2bf38e7e6267c9cbf9545a796", "dead2ddede4c7ba6cb3a721870f5141c97dc7d85a079edb4bd8d88c3ad5b20c7", "dec5202bfe6f672d4511086e125db035a52b00f1648d6407cc8e526912c0353a", "e1ea316102ea1e1770724db01998d1603ed921c54a86a2efcb03428d5417e489", "f90bfc4ad18450c80b024036eaf91e4a246ae287701aaa88eaebebf150868052"]
 decorator = ["41fa54c2a0cc4ba648be4fd43cff00aedf5b9465c9bf18d64325bc225f08f760", "e3a62f0520172440ca0dcc823749319382e377f37f140a0b99ef45fecb84bfe7"]
 distlib = ["2e166e231a26b36d6dfe35a48c4464346620f8645ed0ace01ee31822b288de21"]
 filelock = ["18d82244ee114f543149c66a6e0c14e9c4f8a1044b5cdaadd0f82159d6a6ff59", "929b7d63ec5b7d6b71b0fa5ac14e030b3f70b75747cef1b10da9b879fef15836"]
-identify = ["0f3c3aac62b51b86fea6ff52fe8ff9e06f57f10411502443809064d23e16f1c2", "f9ad3d41f01e98eb066b6e05c5b184fd1e925fadec48eb165b4e01c72a1ef3a7"]
+identify = ["be66b9673d59336acd18a3a0e0c10d35b8a780309561edf16c46b6b74b83f6af", "ef6fa3d125c27516f8d1aaa2038c3263d741e8723825eb38350cdc0288ab35eb"]
 importlib-metadata = ["2a688cbaa90e0cc587f1df48bdc97a6eadccdcd9c35fb3f976a09e3b5016d90f", "34513a8a0c4962bc66d35b359558fd8a5e10cd472d37aec5f66858addef32c1e"]
+importlib-resources = ["6f87df66833e1942667108628ec48900e02a4ab4ad850e25fbf07cb17cf734ca", "85dc0b9b325ff78c8bef2e4ff42616094e16b98ebd5e3b50fe7e2f0bbcdcde49"]
 ipython = ["5b241b84bbf0eb085d43ae9d46adf38a13b45929ca7774a740990c2c242534bb", "f0126781d0f959da852fb3089e170ed807388e986a8dd4e6ac44855845b0fb1c"]
 ipython-genutils = ["72dd37233799e619666c9f639a9da83c34013a73e8bbc79a7a6348d93c61fab8", "eb2e116e75ecef9d4d228fdc66af54269afa26ab4463042e33785b887c628ba8"]
 isort = ["54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1", "6e811fcb295968434526407adb8796944f1988c5b65e8139058f2014cbe100fd"]
@@ -517,8 +544,8 @@ parso = ["158c140fc04112dc45bca311633ae5033c2c2a7b732fa33d0955bad8152a8dd0", "90
 pexpect = ["0b48a55dcb3c05f3329815901ea4fc1537514d6ba867a152b581d69ae3710937", "fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"]
 pickleshare = ["87683d47965c1da65cdacaf31c8441d12b8044cdec9aca500cd78fc2c683afca", "9649af414d74d4df115d5d718f82acb59c9d418196b7b4290ed47a12ce62df56"]
 pluggy = ["15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0", "966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"]
-pre-commit = ["5559e09afcac7808933951ffaf4ff9aac524f31efbc3f24d021540b6c579813c", "703e2e34cbe0eedb0d319eff9f7b83e2022bb5a3ab5289a6a8841441076514d0"]
-prompt-toolkit = ["563d1a4140b63ff9dd587bda9557cffb2fe73650205ab6f4383092fb882e7dc8", "df7e9e63aea609b1da3a65641ceaf5bc7d05e0a04de5bd45d05dbeffbabf9e04"]
+pre-commit = ["09ebe467f43ce24377f8c2f200fe3cd2570d328eb2ce0568c8e96ce19da45fa6", "f8d555e31e2051892c7f7b3ad9f620bd2c09271d87e9eedb2ad831737d6211eb"]
+prompt-toolkit = ["a402e9bf468b63314e37460b68ba68243d55b2f8c4d0192f85a019af3945050e", "c93e53af97f630f12f5f62a3274e79527936ed466f038953dfa379d4941f651a"]
 ptyprocess = ["923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0", "d7cc528d76e76342423ca640335bd3633420dc1366f258cb31d05e865ef5ca1f"]
 py = ["5e27081401262157467ad6e7f851b7aa402c5852dbcb3dae06768434de5752aa", "c20fdd83a5dbc0af9efd622bee9a5564e278f6380fffcacc43ba6f43db2813b0"]
 pygments = ["647344a061c249a3b74e230c739f434d7ea4d8b1d5f3721bc0f3558049b38f44", "ff7a40b4860b727ab48fad6360eb351cc1b33cbf9b15a0f689ca5353e9463324"]
