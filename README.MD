@@ -1,5 +1,7 @@
 # GA Solver
 
+[![Build Status](https://travis-ci.org/fbidu/simple-ga-solver.svg?branch=master)](https://travis-ci.org/fbidu/simple-ga-solver)
+
 Uma forma _pythonica_ de usar Algoritmos Genéticos.
 
 ## Uso
