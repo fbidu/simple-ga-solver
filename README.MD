@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/fbidu/simple-ga-solver.svg?branch=master)](https://travis-ci.org/fbidu/simple-ga-solver)
 [![Documentation Status](https://readthedocs.org/projects/simple-ga-solver/badge/?version=latest)](https://simple-ga-solver.readthedocs.io/en/latest/?badge=latest)
+[![codecov](https://codecov.io/gh/fbidu/simple-ga-solver/branch/master/graph/badge.svg)](https://codecov.io/gh/fbidu/simple-ga-solver)
 
 Uma forma _pythonica_ de usar Algoritmos Genéticos.
 
