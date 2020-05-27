@@ -14,4 +14,4 @@ install:
 script: py.test  --cov-report term --cov=ga_solver
 
 after_success:
-  - codecov
+  - bash <(curl -s https://codecov.io/bash)
