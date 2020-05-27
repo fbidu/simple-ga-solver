@@ -237,3 +237,6 @@ class GASolver:
         A solvers len() is its population's len()
         """
         return len(self.population)
+
+
+__all__ = ["GASolver"]
