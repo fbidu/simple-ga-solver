@@ -15,7 +15,7 @@ script: py.test  --cov-report term --cov=ga_solver
 
 jobs:
   allow_failures:
-    - if: python = "nightly"
+    - python: "nightly"
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
